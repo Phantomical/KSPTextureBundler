@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
+>
+    <engine:VisualElement>
+        <engine:Label class="h1" text="Parallax Asset Bundle Settings" />
+
+        <editor:PropertyField
+            label="Asset Bundle Extension"
+            binding-path="AssetBundleExtension"
+            tooltip="The file extension to use for the generated asset bundle files."
+        />
+        <editor:PropertyField
+            label="Output Path"
+            binding-path="OutputPath"
+            tooltip="The path at which to place the asset bundles. Individual asset bundle output paths will be relative to this directory."
+        />
+        <editor:PropertyField
+            label="Enable LZ4 Compression"
+            binding-path="EnableLZ4Compression"
+            tooltip="Enable chunk-based LZ4 compression for asset bundles. This gives decent space saving with a small increase in load times."
+        />
+        <editor:PropertyField
+            label="Source Asset Directory"
+            binding-path="InputPath"
+            tooltip="The top-level directory that all assets are stored in. All assets within will be flipped vertically on import into the editor. Changing this setting will"
+        />
+
+        <engine:Label class="h3" text="Asset Settings" />
+        <editor:PropertyField
+            label="Flip Textures"
+            binding-path="FlipTextures"
+            tooltip="Flip textures on import. This sets them to the orientation that parallax expects."
+        />
+        <editor:PropertyField
+            label="Crunch Compression"
+            binding-path="CrunchCompression"
+            tooltip="Use crunch compression for DXT1 and DXT5 textures."
+        />
+
+        <editor:PropertyField
+            label="Asset Bundle Entries"
+            binding-path="Entries"
+        />
+    </engine:VisualElement>
+</engine:UXML>

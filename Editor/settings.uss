@@ -1,0 +1,28 @@
+﻿
+.h1
+{
+    padding-top: 5px;
+    font-size: 24px;
+    -unity-font-style: bold;
+}
+
+.h2
+{
+    padding-top: 5px;
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+.h3
+{
+    padding-top: 5px;
+    font-size: 14px;
+    -unity-font-style: bold;
+}
+
+.section-header
+{
+    padding-top: 5px;
+    font-size: 14px;
+    -unity-font-style: bold;
+}

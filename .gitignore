@@ -1,0 +1,11 @@
+
+# Ignore Unity Directories
+/Library
+/Logs
+/MemoryCaptures
+/Packages
+!/Packages/UnityPackageManager
+/Temp
+
+# Other files
+
