@@ -48,7 +48,7 @@ namespace ParallaxEditor
         /// If not set then it will use the input path.
         /// </remarks>
         [SerializeField]
-        public string AssetNamePrefix;
+        public string AssetNamePrefix = "";
 
         /// <summary>
         /// Paths to exclude from the asset bundle.
@@ -66,7 +66,7 @@ namespace ParallaxEditor
         public string InputPath = "Assets";
 
         [SerializeField]
-        public string TemporaryAssetDirectory = "Assets/Editor/Parallax-Editor-Temp";
+        public string TemporaryAssetDirectory = "Assets/KSP-Texture-Bundler/Temp";
 
         [SerializeField]
         public bool EnableLZ4Compression = true;
@@ -75,12 +75,12 @@ namespace ParallaxEditor
         public bool FlipTextures = true;
 
         [SerializeField]
-        public bool CrunchCompression = true;
+        public bool CrunchCompression = false;
 
         [SerializeField]
         public BuildAssetEntry[] Entries = Array.Empty<BuildAssetEntry>();
 
-        private const string SettingsAssetPath = "Assets/Editor/Parallax-Editor-Settings.asset";
+        private const string SettingsAssetPath = "Assets/KSP-Texture-Bundler/Settings.asset";
         public static BuildAssetsConfig Instance
         {
             get
@@ -102,7 +102,7 @@ namespace ParallaxEditor
         public static SettingsProvider CreateProvider()
         {
             return new SettingsProvider(
-                "Parallax/Asset Bundle Settings (v2)",
+                "KSP Texture Bundler/Asset Bundle Settings (v2)",
                 SettingsScope.Project
             )
             {
@@ -125,96 +125,6 @@ namespace ParallaxEditor
                     tree.styleSheets.Add(styleSheet);
                     root.Add(tree);
                     root.Bind(so);
-
-                    //     Instance.hideFlags &= ~HideFlags.NotEditable;
-                    //     var so = new SerializedObject(Instance);
-
-                    //     var container = new VisualElement();
-                    //     container.style.flexDirection = FlexDirection.Column;
-                    //     if (styleSheet != null)
-                    //         container.styleSheets.Add(styleSheet);
-
-                    //     var label = new Label("Asset Bundle Settings");
-                    //     label.AddToClassList("section-header");
-                    //     container.Add(label);
-                    //     container.Add(
-                    //         new PropertyField(
-                    //             so.FindProperty(nameof(AssetBundleExtension)),
-                    //             "Asset Bundle Extension"
-                    //         )
-                    //         {
-                    //             tooltip = "The file extension to use for asset bundles.",
-                    //         }
-                    //     );
-                    //     container.Add(
-                    //         new PropertyField(so.FindProperty(nameof(OutputPath)), "Output Path")
-                    //         {
-                    //             tooltip =
-                    //                 "The path within the project that the asset bundles will be emitted to. "
-                    //                 + "Invidual asset bundle output paths are relative to this path.",
-                    //         }
-                    //     );
-                    //     container.Add(
-                    //         new PropertyField(
-                    //             so.FindProperty(nameof(EnableLZ4Compression)),
-                    //             "Enable LZ4 Compression"
-                    //         )
-                    //         {
-                    //             tooltip =
-                    //                 "Enable chunk-based LZ4 compression for the resulting asset bundles.",
-                    //         }
-                    //     );
-                    //     container.Add(
-                    //         new PropertyField(
-                    //             so.FindProperty(nameof(TemporaryAssetDirectory)),
-                    //             "Temporary Asset Directory"
-                    //         )
-                    //         {
-                    //             tooltip =
-                    //                 "The location to store temporary flipped/compressed copies of assets. "
-                    //                 + "This must be somewhere under Assets but you can otherwise ignore the contents "
-                    //                 + "of this directory.",
-                    //         }
-                    //     );
-
-                    //     label = new Label("Texture Import Settings");
-                    //     label.AddToClassList("section-header");
-                    //     container.Add(label);
-                    //     container.Add(
-                    //         new PropertyField(
-                    //             so.FindProperty(nameof(FlipTextures)),
-                    //             "Flip Textures Vertically"
-                    //         )
-                    //         {
-                    //             tooltip =
-                    //                 "If you import textures directly without asset bundles then "
-                    //                 + "you will find that they are flipped vertically. If this option is "
-                    //                 + "set then they will be converted on the fly before they are added to "
-                    //                 + "the asset bundle.",
-                    //         }
-                    //     );
-                    //     container.Add(
-                    //         new PropertyField(
-                    //             so.FindProperty(nameof(CrunchCompression)),
-                    //             "Crunch Compression"
-                    //         )
-                    //         {
-                    //             tooltip = "Enable crunch compression on DXT1 and DXT5 textures",
-                    //         }
-                    //     );
-
-                    //     label = new Label("Asset Bundle Configuration");
-                    //     label.AddToClassList("section-header");
-                    //     container.Add(label);
-                    //     container.Add(
-                    //         new PropertyField(
-                    //             so.FindProperty(nameof(Entries)),
-                    //             "Asset Bundle Configuration"
-                    //         )
-                    //     );
-
-                    //     root.Add(container);
-                    //     root.Bind(so);
                 },
                 deactivateHandler = AssetDatabase.SaveAssets,
             };

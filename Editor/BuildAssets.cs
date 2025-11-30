@@ -8,7 +8,7 @@ namespace ParallaxEditor
 {
     public static class BuildAssets
     {
-        [MenuItem("Parallax/Build Asset Bundles")]
+        [MenuItem("KSP Texture Bundler/Build Asset Bundles")]
         public static void BuildBundles()
         {
             var config = BuildAssetsConfig.Instance;
@@ -95,9 +95,10 @@ namespace ParallaxEditor
                 string relative = file.StripPrefix(entry.InputPath)
                     .StripPrefix("\\")
                     .StripPrefix("/");
-                string name = entry.AssetNamePrefix is null
-                    ? file
-                    : Path.Combine(entry.AssetNamePrefix, relative);
+                string name =
+                    entry.AssetNamePrefix == ""
+                        ? relative
+                        : Path.Combine(entry.AssetNamePrefix, relative);
                 name = NormalizePath(name);
 
                 string path;
