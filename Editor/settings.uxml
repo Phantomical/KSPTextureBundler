@@ -6,40 +6,42 @@
     xsi:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
 >
     <engine:VisualElement>
-        <engine:Label class="h1" text="Asset Bundle Settings" />
-        <editor:PropertyField
-            label="Output Path"
-            binding-path="OutputPath"
-            tooltip="The path at which to place the asset bundles. Individual asset bundle output paths will be relative to this directory."
-        />
-        <editor:PropertyField
-            label="Source Asset Directory"
-            binding-path="InputPath"
-            tooltip="The top-level directory that all assets are stored in. All assets within will be flipped vertically on import into the editor. Changing this setting will"
-        />
-        <editor:PropertyField
-            label="Enable LZ4 Compression"
-            binding-path="EnableLZ4Compression"
-            tooltip="Enable chunk-based LZ4 compression for asset bundles. This gives decent space saving with a small increase in load times."
-        />
+            <engine:ScrollView>
+            <engine:Label class="h1" text="Asset Bundle Settings" />
+            <editor:PropertyField
+                label="Output Path"
+                binding-path="OutputPath"
+                tooltip="The path at which to place the asset bundles. Individual asset bundle output paths will be relative to this directory."
+            />
+            <editor:PropertyField
+                label="Source Asset Directory"
+                binding-path="InputPath"
+                tooltip="The top-level directory that all assets are stored in. All assets within will be flipped vertically on import into the editor. Changing this setting will"
+            />
+            <editor:PropertyField
+                label="Enable LZ4 Compression"
+                binding-path="EnableLZ4Compression"
+                tooltip="Enable chunk-based LZ4 compression for asset bundles. This gives decent space saving with a small increase in load times."
+            />
 
-        <engine:Label class="h3" text="Asset Settings" />
-        <engine:Label text="If you change these settings you will need to reimport assets before they get applied." />
-        <editor:PropertyField
-            label="Flip Textures"
-            binding-path="FlipTextures"
-            tooltip="Flip textures on import. This sets them to the orientation that parallax expects."
-        />
-        <editor:PropertyField
-            label="Crunch Compression"
-            binding-path="CrunchCompression"
-            tooltip="Use crunch compression for DXT1 and DXT5 textures."
-        />
+            <engine:Label class="h3" text="Asset Settings" />
+            <engine:Label text="If you change these settings you will need to reimport assets before they get applied." />
+            <editor:PropertyField
+                label="Flip Textures"
+                binding-path="FlipTextures"
+                tooltip="Flip textures on import. This sets them to the orientation that parallax expects."
+            />
+            <editor:PropertyField
+                label="Crunch Compression"
+                binding-path="CrunchCompression"
+                tooltip="Use crunch compression for DXT1 and DXT5 textures."
+            />
 
-        <engine:Label class="h3" text="Asset Bundle Entries" />
-        <editor:PropertyField
-            label="Asset Bundle Entries"
-            binding-path="Entries"
-        />
+            <engine:Label class="h3" text="Asset Bundle Entries" />
+            <editor:PropertyField
+                label="Asset Bundle Entries"
+                binding-path="Entries"
+            />
+        </engine:ScrollView>
     </engine:VisualElement>
 </engine:UXML>

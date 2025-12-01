@@ -94,3 +94,6 @@ is `AssetBundles`.
   issues where crunch compression doesn't work properly, which is why it is
   disabled by default.
 
+* If you already have a build pipeline and/or build script then you may want to
+  vertically flip the textures yourself. This will give you more control over
+  the compression settings you use and will likely be much faster.

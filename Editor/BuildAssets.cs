@@ -156,15 +156,7 @@ namespace ParallaxEditor
             if (File.Exists(transformedPath))
                 return transformedPath;
 
-            var fallbackPath = Path.Combine(
-                config.TemporaryAssetDirectory,
-                $"{fileName}-{guid}.fallback.asset"
-            );
-
-            var texture = TextureLoader.LoadTexture(assetPath);
-            AssetDatabase.CreateAsset(texture, fallbackPath);
-
-            return fallbackPath;
+            return assetPath;
         }
     }
 }

@@ -62,12 +62,16 @@ namespace ParallaxEditor
                             texture = TextureLoader.LoadTexture(import);
 
                         EditorUtility.DisplayProgressBar(
-                            $"Creating Flipped DDS Textures ({i}/{paths.Count})",
+                            $"Processing DDS Textures ({i}/{paths.Count})",
                             import,
                             (float)i / paths.Count
                         );
 
-                        var transformed = PostprocessIHVTexture(texture);
+                        Texture2D transformed;
+                        if (NeedsPostprocess(texture))
+                            transformed = PostprocessIHVTexture(texture);
+                        else
+                            transformed = CopyTexture(texture);
 
                         var guid = AssetDatabase.AssetPathToGUID(import);
                         var fileName = Path.GetFileNameWithoutExtension(import);
@@ -125,6 +129,22 @@ namespace ParallaxEditor
 
             texture.SetPixels(pixels);
             texture.Apply(true);
+        }
+
+        static Texture2D CopyTexture(Texture2D texture)
+        {
+            var copy = new Texture2D(
+                texture.width,
+                texture.height,
+                texture.format,
+                texture.mipmapCount > 1,
+                !GraphicsFormatUtility.IsSRGBFormat(texture.graphicsFormat)
+            );
+            copy.Apply(false, !texture.isReadable);
+
+            Graphics.CopyTexture(texture, copy);
+
+            return copy;
         }
 
         static Texture2D PostprocessIHVTexture(Texture2D texture)
@@ -250,5 +270,23 @@ namespace ParallaxEditor
         }
 
         static void Swap<T>(ref T a, ref T b) => (b, a) = (a, b);
+
+        internal static bool NeedsPostprocess(Texture2D texture)
+        {
+            var config = BuildAssetsConfig.Instance;
+            if (config.FlipTextures)
+                return true;
+
+            if (config.CrunchCompression)
+            {
+                if (texture.format == TextureFormat.DXT1 || texture.format == TextureFormat.DXT5)
+                    return true;
+            }
+
+            if (texture.width == 1 && texture.height == 1)
+                return true;
+
+            return false;
+        }
     }
 }
