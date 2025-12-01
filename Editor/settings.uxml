@@ -6,7 +6,7 @@
     xsi:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
 >
     <engine:VisualElement>
-        <engine:Label class="h1" text="Parallax Asset Bundle Settings" />
+        <engine:Label class="h1" text="Asset Bundle Settings" />
         <editor:PropertyField
             label="Output Path"
             binding-path="OutputPath"
