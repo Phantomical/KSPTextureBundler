@@ -16,6 +16,7 @@ Once installed it will add:
 * A new menu entry (menu: KSP Texture Bundler > Build Asset Bundles)
 
 ## Getting Started
+### Configuration
 Before doing anything else you should open up the project settings window
 (menu: edit > Project Settings) and go to the Asset Bundle Settings screen.
 
@@ -26,12 +27,28 @@ create for your mod. The entries you need to fill out are:
 * **Input Path** - A directory containing assets to include in your asset
   bundle. The names of the assets within the bundle will be relative to
   this directory.
+
+  If your assets are at `Assets/MyPlanetTextures` then that's what you should
+  enter here.
+
 * **Output Name** - The path to place the resulting bundle within the
   configured output directory (the Output Path option at the top of the
   settings).
+
+  As an example, `my-planet-textures.unity3d` will result the asset bundle being
+  created at `<output dir>/my-planet-textures.unity3d`. Unity will always convert
+  the path you enter here to lowercase, but the asset building script will
+  attempt to create a directory with the appropriate casing first.
+
 * **Asset Name Prefix** - A directory prefix to prepend to the names of all the
   assets within the bundle. This is useful if you're trying to use the same
   asset names both inside and outside of the bundle.
+
+  If your planet texture is at `Assets/MyPlanetTextures/planet.dds` and you
+  want the final path in the asset bundle to be `MyPlanetTextures/planet.dds`
+  then you should set this to `MyPlanetTextures`. The final path is constructed
+  as `<prefix>/<path within input dir>`.
+
 * **Exclude** - Files to exclude from the bundle. This should be in the form
   of file name globs, not paths.
 
@@ -42,6 +59,7 @@ create for your mod. The entries you need to fill out are:
 > would rather edit the settings using a text editor then you can just open up
 > the file directly.
 
+### Importing & Building
 Once you have your settings set up the way you want them you should import your
 texture assets. If they are already in the project then you will need to reimport
 them. _This will take a while_. If you are mostly dealing with 4k textures expect
