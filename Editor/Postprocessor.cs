@@ -293,8 +293,8 @@ namespace ParallaxEditor
         internal static bool NeedsPostprocess(Texture2D texture, bool manual)
         {
             var config = BuildAssetsConfig.Instance;
-            if (config.FlipTextures)
-                return NeedsFlip(texture, manual);
+            if (config.FlipTextures && NeedsFlip(texture, manual))
+                return true;
 
             if (config.CrunchCompression)
             {
