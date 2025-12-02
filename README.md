@@ -8,7 +8,7 @@ To install the KSP texture bundler:
 * Open the Unity Package Manager in your Project (menu: Window > Package Manager)
 * Click the + (Add) button at the top-left corner of the window.
 * Chose Add package from git URL...
-* Enter <https://github.com/Phantomical/KSP-Texture-Bundler.git> as the URL.
+* Enter <https://github.com/Phantomical/KSPTextureBundler.git> as the URL.
 * Click Add. The package manager downloads and installs the package's "main" branch.
 
 Once installed it will add:
