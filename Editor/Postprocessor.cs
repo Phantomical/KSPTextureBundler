@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
@@ -10,7 +9,7 @@ namespace ParallaxEditor
 {
     public class KSPTexturePostprocessor : AssetPostprocessor
     {
-        public override uint GetVersion() => 8;
+        public override uint GetVersion() => 9;
 
         internal void OnPostprocessTexture(Texture2D texture)
         {
@@ -57,9 +56,13 @@ namespace ParallaxEditor
 
                     try
                     {
+                        bool manual = false;
                         var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(import);
                         if (texture == null)
+                        {
                             texture = TextureLoader.LoadTexture(import);
+                            manual = true;
+                        }
 
                         EditorUtility.DisplayProgressBar(
                             $"Processing DDS Textures ({i}/{paths.Count})",
@@ -68,8 +71,8 @@ namespace ParallaxEditor
                         );
 
                         Texture2D transformed;
-                        if (NeedsPostprocess(texture))
-                            transformed = PostprocessIHVTexture(texture);
+                        if (NeedsPostprocess(texture, manual))
+                            transformed = PostprocessIHVTexture(texture, manual);
                         else
                             transformed = CopyTexture(texture);
 
@@ -147,7 +150,7 @@ namespace ParallaxEditor
             return copy;
         }
 
-        static Texture2D PostprocessIHVTexture(Texture2D texture)
+        static Texture2D PostprocessIHVTexture(Texture2D texture, bool manual)
         {
             var config = BuildAssetsConfig.Instance;
             var isLinear = !GraphicsFormatUtility.IsSRGBFormat(texture.graphicsFormat);
@@ -164,7 +167,7 @@ namespace ParallaxEditor
 
             var rt = new RenderTexture(texture.width, texture.height, 0, rtFormat, rtLinear);
 
-            if (config.FlipTextures)
+            if (config.FlipTextures && NeedsFlip(texture, manual))
                 Graphics.Blit(
                     texture,
                     rt,
@@ -269,11 +272,29 @@ namespace ParallaxEditor
 
         static void Swap<T>(ref T a, ref T b) => (b, a) = (a, b);
 
-        internal static bool NeedsPostprocess(Texture2D texture)
+        // Imported textures are inconsistent in whether they actually need to
+        // be flipped from the default north-down that parallax uses.
+        //
+        // This method overrides flipping in the following cases:
+        // - manually loaded textures are loaded the same way that parallax
+        //   loads textures and do not need to be flipped.
+        // - BC7 doesn't need to be flipped for some reason.
+        internal static bool NeedsFlip(Texture2D texture, bool manual)
+        {
+            if (manual)
+                return false;
+
+            if (texture.format == TextureFormat.BC7)
+                return false;
+
+            return true;
+        }
+
+        internal static bool NeedsPostprocess(Texture2D texture, bool manual)
         {
             var config = BuildAssetsConfig.Instance;
             if (config.FlipTextures)
-                return true;
+                return NeedsFlip(texture, manual);
 
             if (config.CrunchCompression)
             {

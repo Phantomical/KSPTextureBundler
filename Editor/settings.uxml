@@ -29,7 +29,7 @@
             <editor:PropertyField
                 label="Flip Textures"
                 binding-path="FlipTextures"
-                tooltip="Flip textures on import. This sets them to the orientation that parallax expects."
+                tooltip="Flip textures so that they match what parallax expects. This will flip everything but BC7, L8, and R16 textures."
             />
             <editor:PropertyField
                 label="Crunch Compression"
