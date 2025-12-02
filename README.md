@@ -35,6 +35,13 @@ create for your mod. The entries you need to fill out are:
 * **Exclude** - Files to exclude from the bundle. This should be in the form
   of file name globs, not paths.
 
+> ![INFO]
+>
+> Opening the settings window will create a settings asset at
+> `KSP-Texture-Bundler/Settings.asset`. This file is YAML internally, so if you
+> would rather edit the settings using a text editor then you can just open up
+> the file directly.
+
 Once you have your settings set up the way you want them you should import your
 texture assets. If they are already in the project then you will need to reimport
 them. _This will take a while_. If you are mostly dealing with 4k textures expect
@@ -65,7 +72,7 @@ is `AssetBundles`.
   as larger than 8192x8192. If you want to use 16k textures then you will need to
   convert them to dds textures outside of unity and import the dds textures.
 * There is no support for bundling cubemaps directly at this time. You should
-  continue to use parallax's format for cubemaps in a 
+  continue to use parallax's format for cubemaps packed into a single 2D texture.
 
 ## Best Practices
 * When textures are imported they will use the import settings as defined in the
@@ -94,6 +101,21 @@ is `AssetBundles`.
   issues where crunch compression doesn't work properly, which is why it is
   disabled by default.
 
-* If you already have a build pipeline and/or build script then you may want to
-  vertically flip the textures yourself. This will give you more control over
-  the compression settings you use and will likely be much faster.
+## Texture Flipping
+When you export loose textures for import into parallax you want then to be
+oriented so that north is down. However, when you import those textures via
+an asset bundle some, but not all, of them need to be flipped so that they
+are oriented north-up.
+
+When texture flipping is enabled then KSP Texture Bundler will flip all imported
+textures vertically except in the following cases:
+* BC7 textures are not flipped
+* textures that unity doesn't know how to parse (L8/R16) are also not flipped.
+
+This is intended to make it so that textures end up being identical to those in
+parallax when they are imported.
+
+If have a custom build script generating your release textures and want to do
+the flipping yourself outside of unity then you will need to make sure that
+you are following the same flipping conventions.
+
