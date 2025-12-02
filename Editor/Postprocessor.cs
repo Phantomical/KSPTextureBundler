@@ -211,8 +211,6 @@ namespace ParallaxEditor
                     return TextureFormat.R8;
                 case TextureFormat.BC5:
                     return TextureFormat.RG16;
-                case TextureFormat.BC6H:
-                    return TextureFormat.RGB48;
                 case TextureFormat.BC7:
                     return TextureFormat.RGBA32;
                 default:
