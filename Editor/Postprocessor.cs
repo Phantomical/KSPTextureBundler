@@ -9,7 +9,7 @@ namespace ParallaxEditor
 {
     public class KSPTexturePostprocessor : AssetPostprocessor
     {
-        public override uint GetVersion() => 9;
+        public override uint GetVersion() => 10;
 
         internal void OnPostprocessTexture(Texture2D texture)
         {
