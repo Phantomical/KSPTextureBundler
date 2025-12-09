@@ -60,7 +60,7 @@ namespace ParallaxEditor
                         var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(import);
                         if (texture == null)
                         {
-                            texture = TextureLoader.LoadTexture(import);
+                            texture = TextureLoader.LoadTexture(import, false);
                             manual = true;
                         }
 
