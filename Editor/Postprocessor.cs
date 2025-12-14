@@ -9,22 +9,7 @@ namespace ParallaxEditor
 {
     public class KSPTexturePostprocessor : AssetPostprocessor
     {
-        public override uint GetVersion() => 10;
-
-        internal void OnPostprocessTexture(Texture2D texture)
-        {
-            var config = BuildAssetsConfig.Instance;
-            if (assetPath.StartsWith(config.TemporaryAssetDirectory))
-                return;
-            if (!assetPath.StartsWith(config.InputPath))
-                return;
-
-            if (assetImporter is IHVImageFormatImporter ihvImporter)
-                // handled in OnPostprocessAllAssets
-                return;
-            else
-                PostprocessRegularTexture(texture);
-        }
+        public override uint GetVersion() => 11;
 
         internal static void OnPostprocessAllAssets(
             string[] importedAssets,
@@ -102,36 +87,6 @@ namespace ParallaxEditor
                 EditorUtility.ClearProgressBar();
                 AssetDatabase.StopAssetEditing();
             }
-        }
-
-        void PostprocessRegularTexture(Texture2D texture)
-        {
-            var config = BuildAssetsConfig.Instance;
-
-            if (texture.width == 1 && texture.height == 1)
-            {
-                texture.Resize(4, 4);
-                return;
-            }
-
-            if (!config.FlipTextures)
-                return;
-
-            var pixels = texture.GetPixels();
-            var width = texture.width;
-            var height = texture.height;
-
-            for (int loy = 0, hiy = height - 1; loy < hiy; loy++, hiy--)
-            {
-                var loStart = loy * width;
-                var hiStart = hiy * width;
-
-                for (int x = 0; x < width; ++x)
-                    Swap(ref pixels[loStart + x], ref pixels[hiStart + x]);
-            }
-
-            texture.SetPixels(pixels);
-            texture.Apply(true);
         }
 
         static Texture2D CopyTexture(Texture2D texture)
