@@ -78,7 +78,6 @@ namespace ParallaxEditor
                     {
                         Debug.LogError($"Failed to postprocess {import}");
                         Debug.LogException(e);
-                        break;
                     }
                 }
             }
