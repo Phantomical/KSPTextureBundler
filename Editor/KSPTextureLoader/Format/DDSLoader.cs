@@ -64,7 +64,7 @@ namespace KSPTextureLoader.Format
                 if (header.ddspf.dwFourCC == DDSValues.uintDX10)
                 {
                     header10 = new DDSHeaderDX10(br);
-                    fileOffset += 24;
+                    fileOffset += 20;
                 }
 
                 if (header.dwSize != 124)
