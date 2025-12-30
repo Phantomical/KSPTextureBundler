@@ -62,7 +62,7 @@ namespace ParallaxEditor
                         }
                         else if (importer != null)
                         {
-                            options.Unreadable = importer.isReadable;
+                            options.Unreadable = !importer.isReadable;
                         }
 
                         EditorUtility.DisplayProgressBar(

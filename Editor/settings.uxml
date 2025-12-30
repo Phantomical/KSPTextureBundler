@@ -24,19 +24,6 @@
                 tooltip="Enable chunk-based LZ4 compression for asset bundles. This gives decent space saving with a small increase in load times."
             />
 
-            <engine:Label class="h3" text="Asset Settings" />
-            <engine:Label text="If you change these settings you will need to reimport assets before they get applied." />
-            <editor:PropertyField
-                label="Flip Textures"
-                binding-path="FlipTextures"
-                tooltip="Flip textures so that they match what parallax expects. This will flip everything but BC7, L8, and R16 textures."
-            />
-            <editor:PropertyField
-                label="Crunch Compression"
-                binding-path="CrunchCompression"
-                tooltip="Use crunch compression for DXT1 and DXT5 textures."
-            />
-
             <engine:Label class="h3" text="Asset Bundle Entries" />
             <editor:PropertyField
                 label="Asset Bundle Entries"

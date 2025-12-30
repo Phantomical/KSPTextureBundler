@@ -72,12 +72,6 @@ namespace ParallaxEditor
         public bool EnableLZ4Compression = true;
 
         [SerializeField]
-        public bool FlipTextures = true;
-
-        [SerializeField]
-        public bool CrunchCompression = false;
-
-        [SerializeField]
         public BuildAssetEntry[] Entries = Array.Empty<BuildAssetEntry>();
 
         private const string SettingsAssetPath = "Assets/KSP-Texture-Bundler/Settings.asset";
